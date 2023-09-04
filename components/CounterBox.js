@@ -1,48 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
 
+const white_mana_symbol = require('../images/white-mana-symbol.png')
+const blue_mana_symbol = require('../images/blue-mana-symbol.png')
+const black_mana_symbol = require('../images/black-mana-symbol.png')
+const red_mana_symbol = require('../images/red-mana-symbol.png')
+const green_mana_symbol = require('../images/green-mana-symbol.png')
+const tazri = require('../images/tazri-stalwart-survivor.png')
+
 const CounterBox = ({ imageUrl }) => {
-  const [number, setNumber] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
-  const [screenHeight, setScreenHeight] = useState(Dimensions.get('window').height);
+  const [manaCounter, setManaCounter] = useState(0);
 
   const handleIncrement = () => {
-    setNumber(number + 1);
+    setManaCounter(manaCounter + 1);
   };
 
   const handleDecrement = () => {
-    setNumber(number - 1);
+    setManaCounter(manaCounter - 1);
   };
-
-  const handleOrientationChange = (newDimensions) => {
-    const { width, height } = newDimensions.window;
-    setScreenWidth(width);
-    setScreenHeight(height);
-  };
-
-  useEffect(() => {
-    Dimensions.addEventListener('change', handleOrientationChange);
-    return () => {
-      Dimensions.removeEventListener('change', handleOrientationChange);
-    };
-  }, []);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.half, styles.topHalf, { zIndex: 2 }]}
-        onPress={handleIncrement}
-      />
-      <TouchableOpacity
-        style={[styles.half, styles.bottomHalf, { zIndex: 2 }]}
-        onPress={handleDecrement}
-      />
-      <View style={styles.backgroundImageContainer}>
-        <Image source={imageUrl} style={[styles.backgroundImage, { width: screenWidth, height: screenHeight }]} />
+      
+      <View style={styles.header}>
+        <Image source={tazri} style={styles.image2} />
       </View>
-      <View style={styles.numberContainer}>
-        <Text style={styles.number}>{number}</Text>
+
+      <View style={styles.box1}>
+        <Image source={white_mana_symbol} style={styles.image} />
       </View>
+
+      <View style={styles.box2}>
+        <Image source={blue_mana_symbol} style={styles.image} />
+      </View>
+
+      <View style={styles.box3}>
+        <Image source={black_mana_symbol} style={styles.image} />
+      </View>
+
+      <View style={styles.box4}>
+        <Image source={red_mana_symbol} style={styles.image} />
+      </View>
+
+      <View style={styles.box5}>
+        <Image source={green_mana_symbol} style={styles.image} />
+      </View>
+
     </View>
   );
 };
@@ -50,44 +53,69 @@ const CounterBox = ({ imageUrl }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  half: {
-    flex: 0.5,
-    width: '100%',
-    height: '50%',
-  },
-  topHalf: {
-    backgroundColor: 'transparent',
-  },
-  bottomHalf: {
-    backgroundColor: 'transparent',
-  },
-  numberContainer: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%', // Take up the full width
-    height: '100%', // Take up the full height
-    zIndex: 1,
-  },
-  number: {
-    fontSize: 100,
-    color: 'white',
-  },
-  backgroundImageContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  backgroundImage: {
-    width: '100%',
+    backgroundColor: 'white',
     height: '100%',
+    width: '33.3%',
   },
+  header: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'black',
+    width: '99%',
+    height: '25%',
+  },
+  box1: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'grey',
+    width: '99%',
+    height: '15%',
+  },
+  box2: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'blue',
+    width: '99%',
+    height: '15%',
+  },
+  box3: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'black',
+    width: '99%',
+    height: '15%',
+  },
+  box4: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'red',
+    width: '99%',
+    height: '15%',
+  },
+  box5: {
+    alignItems:'center',
+    justifyContent:'center',
+    overflow:'hidden',
+    backgroundColor: 'green',
+    width: '99%',
+    height: '15%',
+  },
+  image: {
+    width: '110%',
+    height: '110%',
+  },
+  image2: {
+    top: 73,
+    width:'238%',
+    height: '238%',
+  }
 });
 
 export default CounterBox;
